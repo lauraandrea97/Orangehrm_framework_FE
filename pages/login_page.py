@@ -1,16 +1,37 @@
 from selenium.webdriver.common.by import By
-from .base_page import BasePage
-from untils.config import BASE_URL
+from pages.base_page import BasePage
+from utils.config import BASE_URL
 
 
 class LoginPage(BasePage):
 
-# locatos
-USERNAME_INPUT = (By.NAME, "username")
-PASSWORD_INPUT = (By.NAME, "password")
-LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
+    # Locators
+    USERNAME_INPUT  = (By.NAME, "username")
+    PASSWORD_INPUT  = (By.NAME, "password")
+    LOGIN_BUTTON    = (By.XPATH, "//button[@type='submit']")
+    DASHBOARD_TITLE = (By.XPATH, "//h6[contains(.,'Dashboard')]")
+    ERROR_MESSAGE   = (By.XPATH, "//p[contains(@class,'oxd-alert-content-text')]")
 
+    # Acciones
+    def navigate_login(self):
+        self.navigate_to(BASE_URL)
 
-# Acciones login
-def navigate_login(self):
-    self.navigate_to(BASE_URL)
+    def enter_username(self, username):
+        self.type_text(self.USERNAME_INPUT, username)
+
+    def enter_password(self, password):
+        self.type_text(self.PASSWORD_INPUT, password)
+
+    def click_login(self):
+        self.click(self.LOGIN_BUTTON)
+
+    def login(self, username, password):
+        self.enter_username(username)
+        self.enter_password(password)
+        self.click_login()
+
+    def is_dashboard_visible(self):
+        return self.wait_for_element(self.DASHBOARD_TITLE).is_displayed()
+
+    def is_error_visible(self):
+        return self.wait_for_element(self.ERROR_MESSAGE).is_displayed()
