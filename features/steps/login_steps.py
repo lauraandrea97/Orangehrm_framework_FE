@@ -13,6 +13,8 @@ def step_open_login(context):
 
 @when('ingresa credenciales "{user}" y "{password}"')
 def step_enter_credentials(context, user, password):
+    user = "" if user == "EMPTY" else user
+    password = "" if password == "EMPTY" else password
     context.login_page.login(user, password)
 
 

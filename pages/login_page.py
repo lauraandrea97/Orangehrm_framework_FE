@@ -11,6 +11,7 @@ class LoginPage(BasePage):
     LOGIN_BUTTON    = (By.XPATH, "//button[@type='submit']")
     DASHBOARD_TITLE = (By.XPATH, "//h6[contains(.,'Dashboard')]")
     ERROR_MESSAGE   = (By.XPATH, "//p[contains(@class,'oxd-alert-content-text')]")
+    FIELD_ERROR = (By.XPATH, "//span[contains(@class,'oxd-input-field-error-message')]")
 
     # Acciones
     def navigate_login(self):
@@ -33,5 +34,9 @@ class LoginPage(BasePage):
     def is_dashboard_visible(self):
         return self.wait_for_element(self.DASHBOARD_TITLE).is_displayed()
 
+
     def is_error_visible(self):
-        return self.wait_for_element(self.ERROR_MESSAGE).is_displayed()
+        try:
+            return self.wait_for_element(self.ERROR_MESSAGE).is_displayed()
+        except:
+            return self.wait_for_element(self.FIELD_ERROR).is_displayed()

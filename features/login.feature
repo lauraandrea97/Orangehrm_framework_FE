@@ -16,7 +16,7 @@ Scenario Outline: Validación de Login exitoso con credenciales válidas
     | Admin | admin123 | dashboard |
 
 
-@negativo
+@login
 Scenario Outline: Validación Login fallido con contraseña incorrecta
   When ingresa credenciales "<user>" y "<password>"
   Then debería ver "<resultado>"
@@ -27,11 +27,11 @@ Scenario Outline: Validación Login fallido con contraseña incorrecta
     | wrong | admin123 | mensajeerror |
 
 
-@negativo
+@login
 Scenario Outline: Validación Login fallido con campos vacíos
   When ingresa credenciales "<user>" y "<password>"
   Then debería ver "<resultado>"
 
   Examples:
-    | user | password | resultado    |
-    |      |          | mensajeerror |
+    | user  | password | resultado    |
+    | EMPTY | EMPTY    | mensajeerror |
