@@ -43,3 +43,7 @@ class BasePage:
         element = self.wait_for_element(locator)  # Click seguro: Espera a que el elemento sea visible
         element.clear()                            # Limpiar el campo, evita datos sucios
         element.send_keys(text)
+
+
+    def navigate_to_reset(self):
+        self.navigate_to(self.RESET_URL)
