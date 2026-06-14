@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   correr-tests:
     runs-on: ubuntu-latest
@@ -21,5 +26,10 @@ jobs:
       - name: Instalar mis librerías
         run: pip install -r requirements.txt
 
+      - name: Instalar Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Correr los tests
-        run: pytest
+        run: behave features/ -D BROWSER=chrome
+        env:
+          DISPLAY: ':99'
