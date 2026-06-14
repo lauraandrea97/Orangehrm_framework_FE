@@ -2,3 +2,5 @@ selenium
 pytest
 behave
 webdriver-manager
+
+allure-behave
