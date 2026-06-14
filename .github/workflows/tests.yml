@@ -1,0 +1,25 @@
+name: Mis Tests Orangehrm
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  correr-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Bajar mi código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar mis librerías
+        run: pip install -r requirements.txt
+
+      - name: Correr los tests
+        run: pytest
