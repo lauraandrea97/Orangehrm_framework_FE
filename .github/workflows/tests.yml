@@ -25,6 +25,14 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Correr los tests
-        run: behave features/ -D BROWSER=chrome
+        run: behave features/ -D BROWSER=chrome -f allure_behave.formatter:AllureFormatter -o reports/
         env:
           DISPLAY: ':99'
+
+      - name: Subir reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-tests
+          path: reports/
+          retention-days: 7
